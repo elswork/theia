@@ -32,19 +32,19 @@ LABEL mantainer="Eloy Lopez <elswork@gmail.com>" \
     org.label-schema.version=$VERSION \
     org.label-schema.schema-version="1.0"
 # See : https://github.com/theia-ide/theia-apps/issues/34
-RUN addgroup ${USERNAME} && \
-    adduser -G ${USERNAME} -s /bin/sh -D ${USERNAME};
+RUN addgroup theia && \
+    adduser -G theia -s /bin/sh -D theia;
 RUN chmod g+rw /home && \
     mkdir -p /home/project && \
-    chown -R ${USERNAME}:${USERNAME} /home/theia && \
-    chown -R ${USERNAME}:${USERNAME} /home/project;
+    chown -R theia:theia /home/theia && \
+    chown -R theia:theia /home/project;
 RUN apk add --no-cache git openssh bash
 ENV HOME /home/theia
 WORKDIR /home/theia
-COPY --from=0 --chown=${USERNAME}:${USERNAME} /home/theia /home/theia
-RUN chown ${USERNAME}:${USERNAME} /home/theia
+COPY --from=0 --chown=theia:theia /home/theia /home/theia
+RUN chown theia:theia /home/theia
 EXPOSE 3000
 ENV SHELL /bin/bash
 ENV USE_LOCAL_GIT true
-USER ${USERNAME}
+USER theia
 ENTRYPOINT [ "node", "/home/theia/src-gen/backend/main.js", "/home/project", "--hostname=0.0.0.0" ]

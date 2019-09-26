@@ -3,7 +3,6 @@ NAME ?= elswork/$(SNAME)
 VER ?= `cat VERSION`
 BASE ?= latest
 BASENAME ?= node:10-alpine
-USRNAME ?= theia
 ARCH2 ?= armv7l
 ARCH3 ?= aarch64
 GOARCH := $(shell uname -m)
@@ -26,14 +25,12 @@ help: ## This help.
 
 debug: ## Build the container
 	docker build -t $(NAME):$(GOARCH) \
-	--build-arg USERNAME=$(USRNAME) \
 	--build-arg BASEIMAGE=$(BASENAME) \
 	--build-arg VERSION=$(SNAME)_$(GOARCH)_$(VER) .
 build: ## Build the container
 	docker build --no-cache -t $(NAME):$(GOARCH) \
 	--build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
 	--build-arg VCS_REF=`git rev-parse --short HEAD` \
-	--build-arg USERNAME=$(USRNAME) \
 	--build-arg BASEIMAGE=$(BASENAME) \
 	--build-arg VERSION=$(SNAME)_$(GOARCH)_$(VER) \
 	. > ../builds/$(SNAME)_$(GOARCH)_$(VER)_`date +"%Y%m%d_%H%M%S"`.txt
