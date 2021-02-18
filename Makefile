@@ -2,7 +2,7 @@ SNAME ?= theia
 NAME ?= elswork/$(SNAME)
 VER ?= `cat VERSION`
 BASE ?= latest
-BASENAME ?= node:10-alpine
+BASENAME ?= node:12.18.3-alpine
 
 # HELP
 # This will output the help for each task
