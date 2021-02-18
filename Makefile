@@ -1,5 +1,5 @@
 SNAME ?= theia
-NAME ?= elswork/$(SNAME)
+RNAME ?= elswork/$(SNAME)
 VER ?= `cat VERSION`
 BASE ?= latest
 BASENAME ?= node:12.18.3-alpine
