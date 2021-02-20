@@ -34,3 +34,10 @@ Or
 ``` sh
 docker run -d -p 3000:3000 -v "$(pwd):/home/project:cached" elswork/theia
 ```
+
+---
+**NOTE**
+
+The node user has the same user and group ID as the typical user's system group ID (that is my case).
+
+---
