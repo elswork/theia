@@ -27,7 +27,7 @@ debug: ## Debug the container
 	--build-arg VERSION=$(VER) .
 build: ## Build the container
 	mkdir -p builds
-	docker build $(NO_CACHE) -t $(RNAME):$(VER) \
+	docker build $(NO_CACHE) -t $(RNAME):latest -t $(RNAME):$(VER) \
 	--build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
 	--build-arg VCS_REF=`git rev-parse --short HEAD` \
 	--build-arg BASEIMAGE=$(BASENAME) \
