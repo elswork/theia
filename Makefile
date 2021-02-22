@@ -5,8 +5,8 @@ BASE ?= latest
 BASENAME ?= node:12.18.3-alpine
 TARGET_PLATFORM ?= linux/amd64
 NO_CACHE ?= 
-#NO_CACHE ?= --no-cache
-#linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/arm/v7
+# NO_CACHE ?= --no-cache
+# linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7,linux/arm/v6
 
 # HELP
 # This will output the help for each task
@@ -19,6 +19,7 @@ help: ## This help.
 .DEFAULT_GOAL := help
 
 # DOCKER TASKS
+
 # Build image
 
 debug: ## Debug the container
@@ -27,7 +28,7 @@ debug: ## Debug the container
 	--build-arg VERSION=$(VER) .
 build: ## Build the container
 	mkdir -p builds
-	docker build $(NO_CACHE) -t $(RNAME):latest -t $(RNAME):$(VER) \
+	docker build $(NO_CACHE) -t $(RNAME):$(VER) -t $(RNAME):latest \
 	--build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
 	--build-arg VCS_REF=`git rev-parse --short HEAD` \
 	--build-arg BASEIMAGE=$(BASENAME) \
@@ -44,7 +45,7 @@ debugx: ## Buildx in Debug mode
 buildx: ## Buildx the container
 	docker buildx build $(NO_CACHE) \
 	--platform ${TARGET_PLATFORM} \
-  	-t $(RNAME):latest -t $(RNAME):$(VER) --pull --push \
+	-t $(RNAME):$(VER) -t $(RNAME):latest --pull --push \
 	--build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
 	--build-arg VCS_REF=`git rev-parse --short HEAD` \
 	--build-arg BASEIMAGE=$(BASENAME) \
