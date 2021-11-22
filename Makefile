@@ -27,12 +27,10 @@ debug: ## Debug the container
 	--build-arg BASEIMAGE=$(BASENAME) \
 	--build-arg VERSION=$(VER) .
 build: ## Build the container
-	mkdir -p builds
 	docker build $(NO_CACHE) -t $(RNAME):$(VER) -t $(RNAME):latest \
 	--build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
 	--build-arg BASEIMAGE=$(BASENAME) \
-	--build-arg VERSION=$(VER) \
-	. > builds/$(VER)_`date +"%Y%m%d_%H%M%S"`.txt
+	--build-arg VERSION=$(VER) .
 bootstrap: ## Start multicompiler
 	docker buildx inspect --bootstrap
 debugx: ## Buildx in Debug mode
