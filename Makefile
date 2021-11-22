@@ -30,7 +30,6 @@ build: ## Build the container
 	mkdir -p builds
 	docker build $(NO_CACHE) -t $(RNAME):$(VER) -t $(RNAME):latest \
 	--build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
-	--build-arg VCS_REF=`git rev-parse --short HEAD` \
 	--build-arg BASEIMAGE=$(BASENAME) \
 	--build-arg VERSION=$(VER) \
 	. > builds/$(VER)_`date +"%Y%m%d_%H%M%S"`.txt
