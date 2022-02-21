@@ -3,7 +3,7 @@ RNAME ?= elswork/$(SNAME)
 VER ?= `cat VERSION`
 BASE ?= latest
 BASENAME ?= node:12.18.3-alpine
-TARGET_PLATFORM ?= linux/amd64,linux/arm64,linux/ppc64le,linux/arm/v7
+TARGET_PLATFORM ?= linux/amd64,linux/arm64
 NO_CACHE ?= 
 # NO_CACHE ?= --no-cache
 # linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7,linux/arm/v6
