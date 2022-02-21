@@ -2,8 +2,8 @@ SNAME ?= theia
 RNAME ?= elswork/$(SNAME)
 VER ?= `cat VERSION`
 BASE ?= latest
-BASENAME ?= node:12.22.7-alpine
-TARGET_PLATFORM ?= linux/amd64
+BASENAME ?= node:12-alpine
+TARGET_PLATFORM ?= linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7,linux/arm/v6
 NO_CACHE ?= 
 # NO_CACHE ?= --no-cache
 # linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7,linux/arm/v6
@@ -36,12 +36,13 @@ bootstrap: ## Start multicompiler
 debugx: ## Buildx in Debug mode
 	docker buildx build \
 	--platform ${TARGET_PLATFORM} \
-	-t $(RNAME):debug --pull --load \
+	-t $(RNAME):debug --pull \
 	--build-arg BASEIMAGE=$(BASENAME) \
 	--build-arg VERSION=$(VER) .
 buildx: ## Buildx the container
 	docker buildx build $(NO_CACHE) \
 	--platform ${TARGET_PLATFORM} \
+	-t ghcr.io/$(RNAME):$(VER) -t ghcr.io/$(RNAME):latest \
 	-t $(RNAME):$(VER) -t $(RNAME):latest --pull --push \
 	--build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
 	--build-arg VCS_REF=`git rev-parse --short HEAD` \
