@@ -1,4 +1,4 @@
-ARG BASEIMAGE=node:12.18.3-alpine
+ARG BASEIMAGE=node:12.22.12-alpine
 FROM ${BASEIMAGE}
 RUN apk add --no-cache make pkgconfig gcc g++ python libx11-dev libxkbfile-dev
 ARG version=latest
